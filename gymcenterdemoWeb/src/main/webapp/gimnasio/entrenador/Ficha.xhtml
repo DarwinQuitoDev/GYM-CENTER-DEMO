@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-arrow-left" action="menu" />
+			<p:menuitem value="Nueva Ficha" icon="pi pi-file-o" action="nuevaFicha" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+		<p:staticMessage severity="info" summary="Módulo de Fichas"></p:staticMessage>
+	</h:form>
+	<div>
+		<h:form id="lista">
+			<p:dataTable value="#{beanEntrenador.listaFicha}" var="e">
+				<p:column headerText="Ver" style="width: 2rem">
+					<p:commandButton id="cmdVer" icon="pi pi-eye" title="Ver"
+						action="#{beanEntrenador.selecionarFichaByCliente(e)}" style="margin:0.25rem" />
+				</p:column>
+				<p:column headerText="Agregar" style="width: 5rem">
+					<p:commandButton id="cmdAgregar" icon="pi pi-plus" title="agregar"
+						style="margin:0.25rem" />
+					<p:overlayPanel for="cmdAgregar" dynamic="true"
+						showCloseIcon="true" style="width:80%">
+						<p:panel header="Ficha Antrpometrica">
+							<p:panelGrid columns="4">
+								<h:outputText value="Peso" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfPeso}" />
+								<h:outputText value="Estatura" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfEstatura}" />
+							</p:panelGrid>
+							<h:outputText value="Perimetro Toraxico" />
+							<p:panelGrid columns="4">
+								<h:outputText value="Normal" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfToraxicoNormal}" />
+								<h:outputText value="Inspirado" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfToraxicoInspiracion}" />
+							</p:panelGrid>
+							<h:outputText/>
+							<p:panelGrid columns="4">
+								<h:outputText value="Espalda" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfEspalda}" />
+								<h:outputText value="Cintura" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfCintura}" />
+							</p:panelGrid>
+							<h:outputText value="Perimetro bipces" />
+							<p:panelGrid columns="5">
+								<h:outputText value="Izquierdo" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfBipcesIzq}" />
+								<h:outputText value="Derecho" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfBipcesDer}" />
+							</p:panelGrid>
+							<h:outputText value="Perimetro Muslo" />
+							<p:panelGrid columns="4">
+								<h:outputText value="Izquierdo" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfMusloIzq}" />
+								<h:outputText value="Derecho" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfMusloDer}" />
+							</p:panelGrid>
+							<h:outputText value="Perimetro Pantorilla" />
+							<p:panelGrid columns="4">
+								<h:outputText value="Izquierdo" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfPantorrilaIzq}" />
+								<h:outputText value="Derecho" />
+								<p:inputText value="#{beanEntrenador.nuevoDetFicha.detfPantorrilaDer}" />
+							</p:panelGrid>
+							<p:commandButton value="Agregar ficha"
+								actionListener="#{beanEntrenador.insertarDetFicha(e)}"
+								update="@form" icon="pi pi-save" />
+						</p:panel>
+					</p:overlayPanel>
+				</p:column>
+				<p:column headerText="Numero de cedula"
+					filterBy="#{usuario.apellidos}" filterMatchMode="contains">
+					<h:outputText value="#{e.cliente.cliCedula}" />
+				</p:column>
+				<p:column headerText="Cliente" filterBy="#{usuario.apellidos}"
+					filterMatchMode="contains">
+					<h:outputText value="#{e.cliente.cliApellido} #{e.cliente.cliNombre}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</div>
+</body>
+</html>

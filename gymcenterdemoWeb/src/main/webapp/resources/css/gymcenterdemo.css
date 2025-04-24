@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.top-aligned-columns td{
+	vertical-align: top;
+}
+body {
+	background-image: url("https://turbologo.com/articles/wp-content/uploads/2020/12/fitness-3.png");
+}
+body h2, body h3, body h4, body h5, body h6 {
+  font-family:'Helvetica','Verdana','Monaco',sans-serif;
+}

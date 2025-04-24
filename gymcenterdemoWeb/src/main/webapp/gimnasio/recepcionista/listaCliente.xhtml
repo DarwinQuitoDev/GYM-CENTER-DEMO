@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-arrow-left" action="Cliente" />
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+		<p:staticMessage severity="info" summary="Módulo de Recepcionista"></p:staticMessage>
+	</h:form>
+	<div>
+		<h:form id="lista">
+			<p:dataTable value="#{beanRecepcionista.listaCliente}" var="e">
+				<p:column headerText="ID del Cliente">
+					<h:outputText value="#{e.cliId}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton id="cmdEdicion" icon="pi pi-pencil" title="editar"
+						actionListener="#{beanRecepcionista.seleccionarCliente(e)}" />
+
+					<p:overlayPanel for="cmdEdicion" dynamic="true"
+						showCloseIcon="true" style="width:70%">
+						<p:panel header="Editar cliente" >
+							<p:panelGrid columns="2">
+								<h:outputText value="Cedula del cliente" />
+								<p:inputText
+									value="#{beanRecepcionista.editarCliente.cliCedula}" />
+								<h:outputText value="Nombre" />
+								<p:inputText
+									value="#{beanRecepcionista.editarCliente.cliNombre}" />
+								<h:outputText value="Apellido" />
+								<p:inputText
+									value="#{beanRecepcionista.editarCliente.cliApellido}" />
+								<h:outputText value="Telefono" />
+								<p:inputText
+									value="#{beanRecepcionista.editarCliente.cliTelefono}" />
+								<h:outputText value="Direccion" />
+								<p:inputText
+									value="#{beanRecepcionista.editarCliente.cliDirecciom}" />
+								<p:commandButton value="Actualizar Cliente"
+									actionListener="#{beanRecepcionista.actualizarCliente()}" 
+									update="@form" icon="pi pi-save"/>
+							</p:panelGrid>
+						</p:panel>
+					</p:overlayPanel>
+				</p:column>
+				<p:column headerText="Cedula del cliente">
+					<h:outputText value="#{e.cliCedula}" />
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{e.cliNombre}" />
+				</p:column>
+				<p:column headerText="Apellido">
+					<h:outputText value="#{e.cliApellido}" />
+				</p:column>
+				<p:column headerText="Telefono">
+					<h:outputText value="#{e.cliTelefono}" />
+				</p:column>
+				<p:column headerText="Direccion">
+					<h:outputText value="#{e.cliDirecciom}" />
+				</p:column>
+				<p:column headerText="Correo">
+					<h:outputText value="#{e.cliCorreo}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</div>
+</body>
+</html>

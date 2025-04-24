@@ -29,7 +29,10 @@ gymcennterdemo-main/
 
 ## 👨‍💻 Autores
 
-- Desarrollado por el equipo de GymCenter (reemplazar con nombres reales si aplica).  
+- Desarrollado por el equipo de GymCenter.
+- Darwin Quito
+- Jorge Salgado
+- Marco Inlago  
 
 ## 📄 Licencia
 
